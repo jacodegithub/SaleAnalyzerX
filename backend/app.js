@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
@@ -7,6 +8,7 @@ const router = require('./routes/routes')
 require('dotenv').config()
 
 // Middleware
+app.use(cors()); // Enable CORS
 app.use(morgan('dev')); // Logging middleware
 app.use(bodyParser.json()); // JSON parsing middleware
 app.use(express.json());

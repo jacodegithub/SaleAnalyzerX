@@ -7,6 +7,7 @@ exports.transactions = async (req, res) => {
         const { page = 1, perPage = 10, search = '', month } = req.query;
         // console.log(req.body)
         // Map month names to numerical values
+        console.log('search ', search)
         const monthMap = {
             'january': 1,
             'february': 2,
