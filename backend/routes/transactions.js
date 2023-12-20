@@ -4,7 +4,7 @@ const Product = require('../models/product')
 exports.transactions = async (req, res) => {
     try {
 
-        const { page = 1, perPage = 10, search = '', month } = req.query;
+        const { page = 1, perPage = 5, search = '', month } = req.query;
         // console.log(req.body)
         // Map month names to numerical values
         console.log('search ', search)

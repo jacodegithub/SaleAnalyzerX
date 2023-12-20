@@ -7,7 +7,7 @@ exports.combinedData = async (req, res) => {
         const month = req.params.month;
 
         // Define the URLs for the three APIs
-        const api1URL = `http://localhost:8080/api/transactions/${month}`;
+        const api1URL = `http://localhost:8080/api/transactions?month=${month}`;
         const api2URL = `http://localhost:8080/api/statistics/${month}`;
         const api3URL = `http://localhost:8080/api/pie-chart/${month}`;
         const api4URL = `http://localhost:8080/api/bar-chart/${month}`;
