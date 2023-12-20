@@ -1,7 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const Product = require('../models/product'); // Import your Product model
 
-// API endpoint for statistics
-exports.statistics = async (req, res) => {
+exports.pieChart = async (req, res) => {
     try {
         const monthName = req.params.month.toLowerCase();
 
@@ -28,43 +29,23 @@ exports.statistics = async (req, res) => {
             throw new Error('Invalid month name');
         }
 
-        // Calculate statistics
-        const totalSaleAmount = await Product.aggregate([
+        // Aggregate data for each category
+        const categoryData = await Product.aggregate([
             {
                 $match: {
                     sold: true,
-                    dateOfSale: {
-                        $regex: `-${monthNumber.toString().padStart(2, '0')}-`
-                    }
+                    dateOfSale: { $regex: `-${monthNumber.toString().padStart(2, '0')}-` }
                 }
             },
             {
                 $group: {
-                    _id: null,
-                    totalAmount: { $sum: '$price' }
+                    _id: '$category',
+                    count: { $sum: 1 }
                 }
             }
         ]);
 
-        const totalSoldItems = await Product.countDocuments({
-            sold: true,
-            dateOfSale: {
-                $regex: `-${monthNumber.toString().padStart(2, '0')}-`
-            }
-        });
-
-        const totalNotSoldItems = await Product.countDocuments({
-            sold: false,
-            dateOfSale: {
-                $regex: `-${monthNumber.toString().padStart(2, '0')}-`
-            }
-        });
-
-        res.json({
-            totalSaleAmount: totalSaleAmount.length > 0 ? totalSaleAmount[0].totalAmount : 0,
-            totalSoldItems,
-            totalNotSoldItems
-        });
+        res.json(categoryData);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

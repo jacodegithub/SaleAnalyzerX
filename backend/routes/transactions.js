@@ -1,5 +1,3 @@
-const express = require('express')
-const router = express.Router();
 const Product = require('../models/product')
 
 
@@ -7,8 +5,8 @@ exports.transactions = async (req, res) => {
     try {
 
         const { page = 1, perPage = 10, search = '', month } = req.query;
-        console.log(req.body)
-            // Map month names to numerical values
+        // console.log(req.body)
+        // Map month names to numerical values
         const monthMap = {
             'january': 1,
             'february': 2,
