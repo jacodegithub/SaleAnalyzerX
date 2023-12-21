@@ -13,6 +13,7 @@ Welcome to the Combined Dashboard project! This project is designed to provide a
 - **Search Functionality:** Search for transactions based on keywords to quickly find relevant information.
 
 ![three](saleanalyzer2.png)
+![four](saleanaylzer3-1.png)
 
 ## Getting Started
 
