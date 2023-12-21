@@ -21,7 +21,8 @@ const CombinedDashboard = () => {
 
   useEffect(() => {
     fetchData();
-  }, [selectedMonth, currentPage]); // Include currentPage in the dependency array
+    setCurrentPage(1);
+  }, [selectedMonth]); // Include currentPage in the dependency array
 
 //   console.log(currentPage);
   const fetchData = async () => {
@@ -57,6 +58,23 @@ const CombinedDashboard = () => {
     }
   }
 
+  const transactionData = async (pageNum) => {
+    try {
+      const apiUrl = `http://localhost:8080/api/transactions?month=${selectedMonth}&page=${pageNum}`;
+      const response = await fetch(apiUrl);
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log('API Response:', data);
+      setPropTransactions(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const searchTransactions = (event) => {
     event.preventDefault();
     setCurrentPage(1); // Reset page to 1 when searching
@@ -66,8 +84,7 @@ const CombinedDashboard = () => {
   const handleNextPage = async () => {
     setCurrentPage((prevPage) => {
         const nextPage = prevPage + 1;
-        console.log(nextPage, totalPages);
-        if(nextPage > 1) {
+        if(nextPage <= 3) {
             transactionData(nextPage)
         }
 
@@ -76,20 +93,16 @@ const CombinedDashboard = () => {
 
   };
 
-  const transactionData = async (pageNum) => {
-    try {
-        const response = await axios.get(`http://localhost:8080/api/transactions?month=${selectedMonth}&page=${pageNum}`);
-        // console.log('res',response.data)
-        setPropTransactions(response.data);
-        // console.log(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-  }
-
   const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
+    if (currentPage > 0) {
+      setCurrentPage((prevPage) => {
+        const nextPage = prevPage - 1;
+        if(nextPage >= 1) {
+            transactionData(nextPage)
+        }
+
+        return nextPage;
+    });
     }
   };
 
