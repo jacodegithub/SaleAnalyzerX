@@ -62,7 +62,7 @@ const BarChart = ({ data }) => {
   }, [data]);
 
   const barChartContent = data.map((item, index) => (
-    <tr key={index} className="">
+    <tr key={index} className="font-bold text-slate-800">
       <td className="p-4 text-center">{item.range}</td>
       <td className="p-4 text-center">{item.count}</td>
     </tr>
