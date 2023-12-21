@@ -40,7 +40,7 @@ const CombinedDashboard = () => {
   const searchFunction = async () => {
 
     try {
-      console.log(searchQuery);
+      // console.log(searchQuery);
       const apiUrl = `http://localhost:8080/api/transactions?search=${searchQuery}`
 
       // If searching, append the search query to the API URL
@@ -49,9 +49,9 @@ const CombinedDashboard = () => {
       // }
 
       const response = await axios.get(apiUrl);
-      console.log('res',response.data)
+      // console.log('res',response.data)
       setPropTransactions(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -79,9 +79,9 @@ const CombinedDashboard = () => {
   const transactionData = async (pageNum) => {
     try {
         const response = await axios.get(`http://localhost:8080/api/transactions?month=${selectedMonth}&page=${pageNum}`);
-        console.log('res',response.data)
+        // console.log('res',response.data)
         setPropTransactions(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

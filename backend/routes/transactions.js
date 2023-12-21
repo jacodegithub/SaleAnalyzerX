@@ -7,7 +7,7 @@ exports.transactions = async (req, res) => {
         const { page = 1, perPage = 5, search = '', month } = req.query;
         // console.log(req.body)
         // Map month names to numerical values
-        console.log('search ', search)
+        // console.log('search ', search)
         const monthMap = {
             'january': 1,
             'february': 2,
@@ -25,7 +25,7 @@ exports.transactions = async (req, res) => {
 
         // Check if the search parameter contains a month name. If yes, use it; otherwise, use the selectedMonth state variable.
         const selectedMonthQuery = search?.toLowerCase().trim() in monthMap ? search.toLowerCase().trim() : (month ? month.toLowerCase() : {});
-        console.log('seleted',selectedMonthQuery);
+        // console.log('seleted',selectedMonthQuery);
         // Check if selectedMonthQuery is a valid key in monthMap
         const monthQuery = selectedMonthQuery && selectedMonthQuery in monthMap ? {
             dateOfSale: {
