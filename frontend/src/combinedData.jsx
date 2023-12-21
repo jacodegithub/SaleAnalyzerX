@@ -28,11 +28,6 @@ const CombinedDashboard = () => {
     try {
       let apiUrl = `http://localhost:8080/api/combined-data/${selectedMonth}`;
 
-      // If searching, append the search query to the API URL
-      if (searchQuery) {
-        apiUrl += `?search=${searchQuery}`;
-      }
-
       const response = await axios.get(apiUrl);
       setCombinedData(response.data);
       setPropTransactions(response.data.transactions);
@@ -42,10 +37,30 @@ const CombinedDashboard = () => {
     }
   };
 
+  const searchFunction = async () => {
+
+    try {
+      console.log(searchQuery);
+      const apiUrl = `http://localhost:8080/api/transactions?search=${searchQuery}`
+
+      // If searching, append the search query to the API URL
+      // if (searchQuery) {
+      //   apiUrl += `?`;
+      // }
+
+      const response = await axios.get(apiUrl);
+      console.log('res',response.data)
+      setPropTransactions(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   const searchTransactions = (event) => {
     event.preventDefault();
     setCurrentPage(1); // Reset page to 1 when searching
-    fetchData();
+    searchFunction();
   };
 
   const handleNextPage = async () => {

@@ -22,11 +22,14 @@ exports.transactions = async (req, res) => {
             'november': 11,
             'december': 12
         };
-    
-        // If month is provided, add it to the query
-        const monthQuery = month ? {
+
+        // Check if the search parameter contains a month name. If yes, use it; otherwise, use the selectedMonth state variable.
+        const selectedMonthQuery = search?.toLowerCase().trim() in monthMap ? search.toLowerCase().trim() : (month ? month.toLowerCase() : {});
+        console.log('seleted',selectedMonthQuery);
+        // Check if selectedMonthQuery is a valid key in monthMap
+        const monthQuery = selectedMonthQuery && selectedMonthQuery in monthMap ? {
             dateOfSale: {
-                $regex: `-${monthMap[month.toLowerCase()].toString().padStart(2, '0')}-`
+                $regex: `-${monthMap[selectedMonthQuery].toString().padStart(2, '0')}-`
             }
         } : {};
 

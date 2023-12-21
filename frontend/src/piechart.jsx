@@ -5,7 +5,7 @@ import './chart.css'
 
 const PieChart = ({ data }) => {
   const chartRef = useRef(null);
-  console.log('pie',data);
+  // console.log('pie',data);
   useEffect(() => {
     const ctx = chartRef.current.getContext('2d');
 
@@ -15,7 +15,7 @@ const PieChart = ({ data }) => {
         labels: data.map(item => item._id),
         datasets: [{
           data: data.map(item => item.count),
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#2196F3'],
+          backgroundColor: ['#6f86d6', '#36A2EB', '#FFCE56', '#4CAF50', '#2196F3'],
           borderWidth: 1,
         }],
       },

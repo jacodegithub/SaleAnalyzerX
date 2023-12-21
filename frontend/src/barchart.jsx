@@ -29,14 +29,28 @@ const BarChart = ({ data }) => {
             title: {
               display: true,
               text: 'Price Range', // X-axis label
+              color: 'white',
+              font: {
+                size: 15,
+              }
             },
+            ticks: {
+              color: 'white',
+            }
           },
           y: {
             beginAtZero: true,
             title: {
               display: true,
               text: 'Count', // Y-axis label
+              color: 'white',
+              font: {
+                size: 15,
+              }
             },
+            ticks: {
+              color: 'white',
+            }
           },
         },
       },
