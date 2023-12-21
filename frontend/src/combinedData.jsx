@@ -68,7 +68,7 @@ const CombinedDashboard = () => {
       }
   
       const data = await response.json();
-      console.log('API Response:', data);
+      // console.log('API Response:', data);
       setPropTransactions(data);
     } catch (error) {
       console.error('Error fetching data:', error);
