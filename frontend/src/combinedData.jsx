@@ -81,7 +81,7 @@ const CombinedDashboard = () => {
 //   console.log('combined ', combinedData);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 py-20">
         <div className="container mx-auto p-4 flex justify-between">
             <div className="mb-4">
                 <label className="text-slate-200 mr-2">Select Month:</label>
@@ -120,8 +120,11 @@ const CombinedDashboard = () => {
             handlePreviousPage={handlePreviousPage}
           />
           <TransactionStatistics statistics={combinedData.statistics} />
-          {/* <PieChart pieChart={combinedData.pieChart} />
-          <BarChart barChart={combinedData.barChart} /> */}
+
+          <div className='container mx-auto p-4 mt-20'>
+            <PieChart data={combinedData.pieChart} />
+            <BarChart data={combinedData.barChart} />
+          </div>
         </>
       )}
     </div>
